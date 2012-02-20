@@ -15,8 +15,9 @@ set ruler
 set enc=utf-8
 set encoding=utf-8
 
-" perldoc as <K> over function name..
-set keywordprg=perldoc\ -f
+" Set perldoc / pman as <K> over function name..
+au BufNewFile,BufRead *.php set keywordprg=pman
+au BufNewFile,BufRead *.pl,*.pm set keywordprg=perldoc\ -f
 
 " Load file template
 autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.template
