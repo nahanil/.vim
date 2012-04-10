@@ -23,9 +23,13 @@ au BufNewFile,BufRead *.pl,*.pm set keywordprg=perldoc\ -f
 autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.template
 
 " Few handy hotkeys
-map <F2> :Vexplore<CR>
-map <F3> :set paste!<CR>
+map <F2> :Ex<CR>
+map <F3> :tabp<CR>
+map <F4> :tabn<CR>
+map <F5> :tabnew<CR>
 map <F7> :set spell!<CR>
+map <F8> :Vexplore<CR>
+map <F9> :set paste!<CR>
 
 " Custom file-type syntax higlighting
 au BufNewFile,BufRead *.phtml set filetype=php
@@ -40,59 +44,11 @@ au BufWinLeave * mkview
 au BufWinEnter * silent loadview
 
 " Persistant Undo
-set undodir=~/.vim/undo
-set undofile
-set undolevels=1000 "maximum number of changes that can be undone
-set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+"set undodir=~/.vim/undo
+"set undofile
+"set undolevels=1000 "maximum number of changes that can be undone
+"set undoreload=10000 "maximum number lines to save for undo on a buffer reload
 
 " Set color scheme
 set t_Co=256
 colorscheme desert
-
-" Auto brackety quotes
-inoremap ( ()<Esc>i
-inoremap [ []<Esc>i
-autocmd Syntax html,vim inoremap < <lt>><Esc>i| inoremap > <c-r>=ClosePair('>')<CR>
-inoremap ) <c-r>=ClosePair(')')<CR>
-inoremap ] <c-r>=ClosePair(']')<CR>
-inoremap " <c-r>=QuoteDelim('"')<CR>
-inoremap ' <c-r>=QuoteDelim("'")<CR>
-
-function ClosePair(char)
- if getline('.')[col('.') - 1] == a:char
- return "\<Right>"
- else
- return a:char
- endif
-endf
-
-function CloseBracket()
- if match(getline(line('.') + 1), '\s*}') < 0
- return "\<CR>}"
- else
- return "\<Esc>j0f}a"
- endif
-endf
-
-function QuoteDelim(char)
- let line = getline('.')
- let col = col('.')
- if line[col - 2] == "\\"
- "Inserting a quoted quotation mark into the string
- return a:char
- elseif line[col - 1] == a:char
- "Escaping out of the string
- return "\<Right>"
- else
- "Starting a string
- return a:char.a:char."\<Esc>i"
- endif
-endf
-" END auto brackety quotes
-
-" To make vimdiff slightly more tolerable..
-highlight DiffAdd term=reverse cterm=bold ctermbg=green ctermfg=white
-highlight DiffChange term=reverse cterm=bold ctermbg=cyan ctermfg=black
-highlight DiffText term=reverse cterm=bold ctermbg=gray ctermfg=black
-highlight DiffDelete term=reverse cterm=bold ctermbg=red ctermfg=black
-
