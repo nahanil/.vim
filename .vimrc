@@ -22,6 +22,9 @@ au BufNewFile,BufRead *.pl,*.pm set keywordprg=perldoc\ -f
 " Load file template
 autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.template
 
+" Load file template
+autocmd BufNewFile * silent! 0r ~/.vim/templates/%:e.template
+
 " Few handy hotkeys
 map <F2> :Ex<CR>
 map <F3> :tabp<CR>
