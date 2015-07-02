@@ -35,6 +35,7 @@ map <F9> :set paste!<CR>
 au BufNewFile,BufRead *.phtml set filetype=php
 au BufNewFile,BufRead *.tt set filetype=html
 au BufNewFile,BufRead *.ejs set filetype=ejs
+au BufNewFile,BufRead *.less set filetype=css
 
 " Perl Module Autocompletion
 set iskeyword+=:
